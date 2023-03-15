@@ -1,0 +1,146 @@
+<div class="row g-5">
+<%= form_with(model: citizen, local: true, class: "needs-validation") do |form| %>
+    <div class="col-md-12 col-lg-12">
+    <div class="row g-3">
+      <div class="col-sm-6">
+        <% if citizen.errors[:full_name].any? %>
+          <span style="color: red"><%= citizen.errors.full_messages_for(:full_name).first %></span><br>
+        <% end %>
+        <%= form.label :full_name, class:"form-label" %>
+        <%= form.text_field :full_name, class:"form-control" %>
+      </div>
+
+      <div class="col-sm-6">
+        <% if citizen.errors[:cpf].any? %>
+          <span style="color: red"><%= citizen.errors.full_messages_for(:cpf).first %></span><br>
+        <% end %>
+        <%= form.label :cpf, class:"form-label" %>
+        <%= form.text_field :cpf, class:"form-control cpf" %>
+      </div>
+
+      <div class="col-sm-6">
+      <% if citizen.errors[:cns].any? %>
+        <span style="color: red"><%= citizen.errors.full_messages_for(:cns).first %></span><br>
+      <% end %>
+        <%= form.label :cns, class:"form-label" %>
+        <%= form.text_field :cns, class:"form-control cns" %>
+      </div>
+
+      <div class="col-sm-6">
+        <% if citizen.errors[:email].any? %>
+          <span style="color: red"><%= citizen.errors.full_messages_for(:email).first %></span><br>
+        <% end %>
+        <%= form.label :email, class:"form-label" %>
+        <%= form.text_field :email, class:"form-control" %>
+      </div>
+
+      <div class="col-sm-6">
+        <% if citizen.errors[:birth_date].any? %>
+          <span style="color: red"><%= citizen.errors.full_messages_for(:birth_date).first %></span><br>
+        <% end %>
+        <%= form.label :birth_date, class:"form-label" %>
+        <%= form.date_field :birth_date, class:"form-control", max: Date.today %>
+      </div>
+
+      <div class="col-sm-6">
+        <% if citizen.errors[:telephone].any? %>
+          <span style="color: red"><%= citizen.errors.full_messages_for(:telephone).first %></span><br>
+        <% end %>
+        <%= form.label :telephone, class:"form-label" %>
+        <%= form.text_field :telephone, class:"form-control telephone" %>
+      </div>
+
+      <div class="col-sm-6">
+        <% if citizen.errors[:status].any? %>
+          <span style="color: red"><%= citizen.errors.full_messages_for(:status).first %></span><br>
+        <% end %>
+        <%= form.label :status, class:"form-label" %><br>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :status, true, class:"form-check-input", checked: true %> Ativo
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :status, false, class:"form-check-input" %> Inativo
+        </div>
+        
+      </div>
+
+      <div class="col-sm-6">
+        <% if citizen.errors[:photo].any? %>
+          <span style="color: red"><%= citizen.errors.full_messages_for(:photo).first %></span><br>
+        <% end %>
+        <%= form.label :photo, class:"form-label" %>(para otimização no sistema, recomendamos fotos na vertical)
+        <%= form.file_field :photo, class:"form-control" %>
+      </div>
+
+      <div class="col-sm-12 text-center">
+        <hr class="my-4">
+        <h1>Endereço</h1>
+      </div>
+
+      <%= form.fields_for :address do |address_subform| %>
+        <div class="col-sm-6">
+          <% if citizen.errors["address.street"].any? %>
+            <span style="color: red"><%= citizen.errors.full_messages_for("address.street").first %></span><br>
+          <% end %>
+          <%= address_subform.label :street, class:"form-label" %>
+          <%= address_subform.text_field :street, class:"form-control" %>
+        </div>
+
+        <div class="col-sm-6">
+          <% if citizen.errors["address.complement"].any? %>
+            <span style="color: red"><%= citizen.errors.full_messages_for("address.complement").first %></span><br>
+          <% end %>
+          <%= address_subform.label :complement, class:"form-label" %>
+          <%= address_subform.text_field :complement, class:"form-control" %>
+        </div>
+
+        <div class="col-sm-6">
+          <% if citizen.errors["address.neighborhood"].any? %>
+            <span style="color: red"><%= citizen.errors.full_messages_for("address.neighborhood").first %></span><br>
+          <% end %>
+          <%= address_subform.label :neighborhood, class:"form-label" %>
+          <%= address_subform.text_field :neighborhood, class:"form-control" %>
+        </div>
+
+        <div class="col-sm-6">
+          <% if citizen.errors["address.city"].any? %>
+            <span style="color: red"><%= citizen.errors.full_messages_for("address.city").first %></span><br>
+          <% end %>
+          <%= address_subform.label :city, class:"form-label" %>
+          <%= address_subform.text_field :city, class:"form-control" %>
+        </div>
+
+        <div class="col-sm-6">
+          <% if citizen.errors["address.state"].any? %>
+            <span style="color: red"><%= citizen.errors.full_messages_for("address.state").first %></span><br>
+          <% end %>
+          <%= address_subform.label :state, class:"form-label" %>
+          <%= address_subform.select :state, Address::BR_STATES.map { |value| [ value, value ] }, {}, {class:"form-select"} %>
+        </div>
+
+        <div class="col-sm-6">
+          <% if citizen.errors["address.postal_code"].any? %>
+            <span style="color: red"><%= citizen.errors.full_messages_for("address.postal_code").first %></span><br>
+          <% end %>
+          <%= address_subform.label :postal_code, class:"form-label" %>
+          <%= address_subform.text_field :postal_code, class:"form-control postal-code" %>
+        </div>
+
+        <div class="col-sm-6">
+          <% if citizen.errors["address.ibge_code"].any? %>
+            <span style="color: red"><%= citizen.errors.full_messages_for("address.ibge_code").first %></span><br>
+          <% end %>
+          <%= address_subform.label :ibge_code, class:"form-label" %>
+          <%= address_subform.text_field :ibge_code, class:"form-control" %>
+        </div>
+      <% end %>
+
+      <div class="col-sm-12 text-center">
+        <hr class="my-4">
+
+        <%= form.submit class:"btn btn-primary btn-lg" %>
+        <%= button_to 'Voltar', citizens_path, class: 'btn btn-lg', method: "get" %>
+      </div>
+  </div>
+<% end %>
+</div>

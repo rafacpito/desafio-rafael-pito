@@ -1,0 +1,29 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: rafaeldb
+      POSTGRES_USER: rafael
+      POSTGRES_PASSWORD: password
+      PGDATA: /tmp
+  web:
+    tty: true
+    stdin_open: true
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      DB_HOST: db
+      DB_NAME: rafaeldb
+      DB_USERNAME: rafael
+      DB_PASSWORD: password
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  redis:
+    image: redis:5.0.7

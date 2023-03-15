@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Você foi cadastrado como munícipe no sistema OM30!</p>
+    <p>
+    Confira os detalhes cadastrados:<br>
+    --------------------------
+    </p>
+    <h5>Dados pessoais</h5>
+    <p>Nome completo: <%= @citizen.full_name %></p>
+    <p>Telefone: <span class="telephone"><%= @citizen.telephone %></span></p>
+    <p>E-mail: <%= @citizen.email %></p>
+    <p>CPF: <span class="cpf"><%= @citizen.cpf %></span></p>
+    <p>CNS: <span class="cns"><%= @citizen.cns %></span></p>
+    <p>Data de nascimento: <%= @citizen.birth_date.strftime('%d/%m/%Y') %></p>
+    <p>Status: <%= @citizen.status ? 'Ativo' : 'Inativo' %></p>
+    <h5>Endereço</h5>
+    <p>Logradouro: <%= @address.street %></p>
+    <p>Complemento: <%= @address.complement.present? ? @address.complement : 'N/A' %></p>
+    <p>Bairro: <%= @address.neighborhood %></p>
+    <p>Cidade: <%= @address.city %></p>
+    <p>UF: <%= @address.state %></p>
+    <p>CEP: <span class="postal-code"><%= @address.postal_code %></span></p>
+    <p>Código do IBGE: <%= @address.ibge_code.present? ? @address.ibge_code : 'N/A' %></p>
+    <p>
+  </body>
+</html>

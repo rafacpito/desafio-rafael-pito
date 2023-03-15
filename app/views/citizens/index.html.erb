@@ -1,0 +1,79 @@
+<% if notice.present? %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+<h2 style="display:inline-block;">Munícipes</h2>
+<%= link_to 'Novo Munícipe', new_citizen_path, class: 'btn btn-primary', method: "get", style:"float: right"  %>
+
+<%= search_form_for @q do |f| %>
+  <div class="row">
+    <div class='col-sm-4'>
+      <%= f.label :full_name_cont %>
+      <%= f.search_field :full_name_cont, class:"form-control" %>
+    </div>
+    <div class='col-sm-4'>
+      <%= f.label :cpf_eq %>
+      <%= f.search_field :cpf_eq, class:"form-control cpf" %>
+    </div>
+    <div class= 'col-sm-4'>
+      Status<br>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button(:status_true, "1", class:"form-check-input") %> Ativo
+      </div>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button(:status_true, "0", class:"form-check-input") %> Inativo
+      </div>
+    </div>
+    <div class= 'col-sm-4'>
+      <%= submit_tag "Filtrar", class:"btn btn-primary btn-lg" %>
+    </div>
+  </div>
+<% end %>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" width="10%">Foto</th>
+      <th scope="col" width="10%">Nome Completo</th>
+      <th scope="col" width="10%">Cpf</th>
+      <th scope="col" width="10%">Cns</th>
+      <th scope="col" width="10%">Email</th>
+      <th scope="col" width="10%">Data de nascimento</th>
+      <th scope="col" width="10%">Telefone</th>
+      <th scope="col" width="5%">Status</th>
+      <th scope="col" width="10%">Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @citizens.each do |citizen| %>
+      <tr>
+        <td><%= image_tag citizen.photo.url, style: "max-width: 130px; max-heigth: 130px;" %></td>
+        <td class="align-middle"><%= citizen.full_name %></td>
+        <td class="align-middle cpf"><%= citizen.cpf %></td>
+        <td class="align-middle cns"><%= citizen.cns %></td>
+        <td class="align-middle"><%= citizen.email %></td>
+        <td class="align-middle"><%= citizen.birth_date.strftime('%d/%m/%Y') %></td>
+        <td class="align-middle telephone"><%= citizen.telephone %></td>
+        <td class="align-middle"><%= citizen.status ? 'Ativo' : 'Inativo' %></td>
+        <td class="align-middle">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary">Ações</button>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Detalhes', citizen, class: "dropdown-item" %></li>
+            <li><%= link_to 'Editar', edit_citizen_path(citizen), class: "dropdown-item" %></li>
+          </ul>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-center">
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+  <% if notice.present? %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <h1 class="text-center mt-3" style="margin-bottom: 7rem">Detalhes do munícipe</h1>
+    <div class="col-sm-3">
+      <div class="card">
+        <%= image_tag @citizen.photo.url, class:"card-img-top"%>
+      </div>
+    </div>
+    <div class="col-sm-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h3 class="card-title"><%= @citizen.full_name %></h5>
+          <p class="card-text">Telefone: <span class="telephone"><%= @citizen.telephone %></span></p>
+          <p class="card-text">E-mail: <%= @citizen.email %></p>
+          <p class="card-text">CPF: <span class="cpf"><%= @citizen.cpf %></span></p>
+          <p class="card-text">CNS: <span class="cns"><%= @citizen.cns %></span></p>
+          <p class="card-text">Data de nascimento: <%= @citizen.birth_date.strftime('%d/%m/%Y') %></p>
+          <p class="card-text">Status: <%= @citizen.status ? 'Ativo' : 'Inativo' %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-5 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Endereço</h5>
+          <p class="card-text">Logradouro: <%= @address.street %></p>
+          <p class="card-text">Complemento: <%= @address.complement.present? ? @address.complement : 'N/A' %></p>
+          <p class="card-text">Bairro: <%= @address.neighborhood %></p>
+          <p class="card-text">Cidade: <%= @address.city %></p>
+          <p class="card-text">UF: <%= @address.state %></p>
+          <p class="card-text">CEP: <span class="postal-code"><%= @address.postal_code %></span></p>
+          <p class="card-text">Código do IBGE: <%= @address.ibge_code.present? ? @address.ibge_code : 'N/A' %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 d-flex justify-content-center" style="margin-top: 9rem">
+    <%= link_to 'Editar', edit_citizen_path(@citizen), class:"btn btn-primary btn-lg" %> 
+    <%= link_to 'Voltar', citizens_path, class:"btn btn-lg" %> 
+    </div>
+  </div>
+</div>
