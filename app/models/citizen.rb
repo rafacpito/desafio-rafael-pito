@@ -66,7 +66,7 @@ class Citizen < ApplicationRecord
 
   def send_status_updated_email
     CitizenMailer.with(citizen: self).update_citizen_status_email.deliver_later
-    if Rails.env != "production"
+    if Rails.env == "production"
       TwilioTextMessenger.send_sms("Status do munícipe cadastrado com esse telefone alterado de #{self.status ? 'Inativo' : 'Ativo'} \
                                   para #{self.status ? 'Ativo' : 'Inativo'}", self.telephone)
     end

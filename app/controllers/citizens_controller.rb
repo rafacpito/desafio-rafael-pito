@@ -26,7 +26,7 @@ class CitizensController < ApplicationController
     respond_to do |format|
       if @citizen.save
         CitizenMailer.with(citizen: @citizen).new_citizen_email.deliver_later
-        if Rails.env != "production"
+        if Rails.env == "production"
           TwilioTextMessenger.send_sms("Munícipe criado no sistema OM30 com esse número de telefone", @citizen.telephone)
         end
 
