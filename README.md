@@ -46,4 +46,18 @@ rails db:migrate RAILS_ENV=test
 rspec spec
 ```
 
+# Ferramentas
+
+Lista de algumas ferramentas utilizadas:
+- Utilizado o docker e docker-compose para criar ambiente de desenvolvimento;
+- Maioria dos arquivos e mais necessarios testados com rspec;
+- Twilio para envio de sms;
+- Para email foi utilizado o proprio ActionMailer do Rails;
+- ActionView para fazer o front, Bootstrap para estilizar, Jquery com a gem jquery_mask_rails para fazer as mascaras de CPF, CNS, CEP e telefone;
+- Gem email_validator e cpf_cnpj para validação de e_mail e cpf, respectivamente;
+- Carrierwave para upload da foto do munícipe;
+- Will Paginate para listagem paginada(munícipes mostrados por pagina é 5, possível alterar mandando per_page na url);
+- Ransack para filtrar a listagem;
+- FactoryBot, Faker, Shoulda Matchers para auxiliar nos testes via rspec.
+
 Qualquer dúvida só entrar em contato.
