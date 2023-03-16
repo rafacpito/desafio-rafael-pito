@@ -5,7 +5,7 @@ class CitizensController < ApplicationController
   def index
     params[:q][:cpf_eq] = params[:q][:cpf_eq].gsub(/[.-]/, '') if params[:q].present? && params[:q][:cpf_eq].present?
     @q = Citizen.ransack(params[:q])
-    @citizens = @q.result(distinct: true).page(params[:page]).paginate(page: params[:page], per_page: 5)
+    @citizens = @q.result(distinct: true).page(params[:page]).paginate(page: params[:page], per_page: params[:per_page] || 5)
   end
 
   def show
