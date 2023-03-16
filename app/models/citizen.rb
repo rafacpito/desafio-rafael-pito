@@ -63,9 +63,9 @@ class Citizen < ApplicationRecord
 
   def send_status_updated_email
     CitizenMailer.with(citizen: self).update_citizen_status_email.deliver_later
-    # comentado pois a trial do twilio(que já cobra), so permite enviar para numeros de telefones verificados, porem foi implementado o envio
-    # e nao achei nenhuma gem que fizesse o envio gratuito
-    #TwilioTextMessenger.send_sms("Status do munícipe cadastrado com esse telefone alterado de #{self.status ? 'Inativo' : 'Ativo'} \
-    #                             para #{self.status ? 'Ativo' : 'Inativo'}", self.telephone)
+    if Rails.env != "production"
+      TwilioTextMessenger.send_sms("Status do munícipe cadastrado com esse telefone alterado de #{self.status ? 'Inativo' : 'Ativo'} \
+                                  para #{self.status ? 'Ativo' : 'Inativo'}", self.telephone)
+    end
   end
 end
