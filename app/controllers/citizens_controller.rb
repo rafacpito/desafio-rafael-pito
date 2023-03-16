@@ -25,7 +25,9 @@ class CitizensController < ApplicationController
 
     respond_to do |format|
       if @citizen.save
-        NotificateCitizenCreationWorker.perform_async(@citizen.id)
+        CitizenMailer.with(citizen: @citizen).new_citizen_email.deliver_later
+        TwilioTextMessenger.send_sms("Munícipe criado no sistema OM30 com esse número de telefone")
+
         format.html { redirect_to citizen_url(@citizen), notice: "Munícipe criado com sucesso." }
         format.json { render :show, status: :created, location: @citizen }
       else
