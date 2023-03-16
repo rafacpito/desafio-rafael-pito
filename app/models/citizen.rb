@@ -8,14 +8,13 @@ class Citizen < ApplicationRecord
   with_options presence: true do
     validates :full_name
     validates :cpf, uniqueness: true, length: { is: 11 }, numericality: { only_integer: true }
-    validates :cns, uniqueness: true, length: { is: 15 }, numericality: { only_integer: true }
+    validates :cns, length: { is: 15 }, numericality: { only_integer: true }
     validates :email, email: true
     validates :telephone, length: { minimum: 12, maximum: 15 }
     validates :birth_date
     validates :photo
   end
 
-  validates :status, inclusion: { in: [ true, false ] }
   validate :validate_date
   validate :validate_cns
   validate :validate_cpf
@@ -32,6 +31,8 @@ class Citizen < ApplicationRecord
   end
 
   def validate_cns
+    return if cns.blank?
+
     if cns.match(/[1-2][0-9]{10}00[0-1][0-9]/) || cns.match(/[7-9][0-9]{14}/)
       if weighted_sum % 11 != 0
         errors.add(:cns, 'inválido.')
@@ -56,6 +57,8 @@ class Citizen < ApplicationRecord
   end
   
   def unmask_cpf_cns_and_telephone
+    return if self.cpf.nil? || self.cns.nil? || self.telephone.nil?
+    
     self.cpf = self.cpf.gsub(/[.-]/, '')
     self.cns = self.cns.gsub(' ', '')
     self.telephone = self.telephone.gsub(/[+-]/, '').gsub(' ', '')

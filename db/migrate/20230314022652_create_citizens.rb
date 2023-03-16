@@ -6,7 +6,7 @@ class CreateCitizens < ActiveRecord::Migration[5.2]
       t.date :birth_date, null: false
       t.string :telephone, null: false
       t.string :cpf, null: false, unique: true
-      t.string :cns, null: false, unique: true
+      t.string :cns, null: false
       t.string :email, null: false, unique: true
       t.boolean :status, null: false
 

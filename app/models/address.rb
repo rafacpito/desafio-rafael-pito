@@ -15,6 +15,8 @@ class Address < ApplicationRecord
   before_validation :unmask_postal_code
 
   def unmask_postal_code
+    return if self.postal_code.nil?
+
     self.postal_code = self.postal_code.gsub('-', '')
   end
 end

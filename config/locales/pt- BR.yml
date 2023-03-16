@@ -280,6 +280,8 @@ pt-BR:
               blank: "não pode ficar em branco"
             photo:
               blank: "não pode ficar em branco"
+    exceptions:
+      not_found: "%{model_name} não encontrado"
   helpers:
     submit:
       create: "Criar %{model}"

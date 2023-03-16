@@ -42,6 +42,9 @@ gem 'jquery_mask_rails', '~> 0.1.0'
 gem 'ransack'
 gem 'twilio-ruby'
 gem 'sidekiq'
+gem 'rspec-rails', '~> 4.0.0'
+gem 'faker'
+gem 'cpf_faker'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -54,6 +57,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
 end
 
 group :development do
