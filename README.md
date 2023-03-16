@@ -1,2 +1,32 @@
 # desafio-rafael-pito
-Desafio Ruby on Rails
+Desafio Ruby on Rails 
+
+# Produção
+Link da aplicação em desenvolvimento: https://desafio-rafael-pito.herokuapp.com
+As fotos, algumas estão quebrando, outras funcionando
+
+# Desenvolvimento
+Caso queira rodar a aplicação em desenvolvimento(necessario ter o docker e docker-compose na maquina):
+- Clonar a aplicação entrar na pasta dela e rodar o seguinte comando:
+docker-compose build
+- Apos buildar, é necessario subir o docker-compose:
+docker-compose up
+- Após subir o docker, entrar nele com o comando:
+docker exec -it desafio-rafael-pito_web_1 bash
+- e subir as migrations com o comando:
+rails db:migrate
+
+Após isso, acessar o localhost:3000 e o sistema já esta pronto para utilização.
+
+#Testes
+Caso queira rodar os testes feitos da aplicação:
+- Acessar o docker com o comando:
+docker exec -it desafio-rafael-pito_web_1 bash
+- Criar o banco de dados de teste:
+rails db:create RAILS_ENV=test
+- e subir as migrations com o comando:
+rails db:migrate
+- e após isso é so rodar os testes:
+rspec spec
+
+Qualquer dúvida só entrar em contato.
