@@ -39,7 +39,7 @@ rails db:create RAILS_ENV=test
 ```
 - e subir as migrations com o comando:
 ```sh
-rails db:migrate
+rails db:migrate RAILS_ENV=test
 ```
 - e após isso é so rodar os testes:
 ```sh
