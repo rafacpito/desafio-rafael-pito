@@ -1,5 +1,5 @@
 # desafio-rafael-pito
-Desafio Ruby on Rails 
+Desafio Ruby on Rails feito para empresa OM30.
 
 # Produção
 Link da aplicação em desenvolvimento: https://desafio-rafael-pito.herokuapp.com
