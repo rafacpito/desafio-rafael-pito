@@ -71,14 +71,14 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.yourserver.com',
-    port:                 25,
-    domain:               'yourrubyapp.com',
-    user_name:            '<your username>',
-    password:             '<your password>',
-    authentication:       'plain',
-    enable_starttls_auto: true
+    :address            => 'smtp.gmail.com',
+    :port               => 587,
+    :domain             => 'gmail.com',
+    :authentication     => :plain,
+    :user_name          => Rails.application.credentials.gmail_user,
+    :password           => Rails.application.credentials.gmail_password
   }
+  config.action_mailer.default_url_options = { :host => 'desafio-rafael-pito.herokuapp.com' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
