@@ -26,7 +26,9 @@ class CitizensController < ApplicationController
     respond_to do |format|
       if @citizen.save
         CitizenMailer.with(citizen: @citizen).new_citizen_email.deliver_later
-        TwilioTextMessenger.send_sms("Munícipe criado no sistema OM30 com esse número de telefone")
+        # comentado pois a trial do twilio(que já cobra), so permite enviar para numeros de telefones verificados, porem foi implementado o envio
+        # e nao achei nenhuma gem que fizesse o envio gratuito, a que achei sms-easy não funcionou
+        #TwilioTextMessenger.send_sms("Munícipe criado no sistema OM30 com esse número de telefone", @citizen.telephone)
 
         format.html { redirect_to citizen_url(@citizen), notice: "Munícipe criado com sucesso." }
         format.json { render :show, status: :created, location: @citizen }
